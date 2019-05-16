@@ -44,3 +44,49 @@ def deletehero(request,id):
     bookid=hero.book.id
     hero.delete()
     return HttpResponseRedirect('/booktest/detail/%s'%bookid)
+
+def addhero(request,id):
+    if request.method == "GET":
+        print('get')
+        return render(request,'booktest/addhero.html',{'bookid':id})
+    elif request.method =='POST':
+        print('post')
+        book=BookInfo.objects.get(pk=id)
+        hero=HeroInfo()
+        hero.name= request.POST['heroname']
+        hero.gender=request.POST['sex']
+        hero.skill=request.POST['skill']
+        hero.book=book
+        hero.save()
+        return HttpResponseRedirect('/booktest/detail/%s'%id)
+def addbook(request):
+    if request.method=='GET':
+        return render(request, 'booktest/addbook.html')
+    elif request.method=='POST':
+        book=BookInfo()
+        book.title=request.POST['bookname']
+        book.bpud_data=request.POST['time']
+        book.save()
+        return HttpResponseRedirect('/booktest/list/')
+
+def bookupdate(request,id):
+    if request.method=='GET':
+        return render(request,'booktest/bookupdate.html',{'bookid':id})
+    elif request.method=='POST':
+        book=BookInfo.objects.get(pk=id)
+        book.title=request.POST['bookname']
+        book.bpud_data=request.POST['time']
+        book.save()
+        return HttpResponseRedirect('/booktest/list/')
+
+def heroupdate(request,id):
+    if request.method=='GET':
+        return render(request,'booktest/heroupdate.html',{"heroid":id})
+    elif request.method=='POST':
+        hero=HeroInfo.objects.get(pk=id)
+        bookid=hero.book.id
+        hero.name=request.POST['heroname']
+        hero.gender=request.POST['sex']
+        hero.skill=request.POST['skill']
+        hero.save()
+        return HttpResponseRedirect('/booktest/detail/%s'%bookid)

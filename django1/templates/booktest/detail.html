@@ -10,15 +10,16 @@
     <h2>{{ book.title }}</h2>
     {% for b in book.heroinfo_set.all %}
         <ul>
-        <li>{{ b.name }}--{{ b.gender }}--{{ b.skill }}&nbsp;&nbsp;&nbsp;<a href="{% url 'booktest:deletehero' b.id %}">删除</a></li>
+        <li>{{ b.name }}--{{ b.gender }}--{{ b.skill }}&nbsp;&nbsp;&nbsp;<a href="{% url 'booktest:deletehero' b.id %}">删除</a>&nbsp;&nbsp;&nbsp;<a href="{% url 'booktest:heroupdate' b.id  %}">修改</a></li>
         </ul>
     {% empty %}
-        没有书籍
+        没有英雄
     {% endfor %}
 {% else %}
 没收到
 {% endif %}
-<!--<p><a href="/booktest/list/">返回上一页</a></p>-->
-<p><a href="{% url 'booktest:list' %}">返回上一页</a></p>
+<p><a href="{% url 'booktest:addhero' book.id %}">添加英雄</a></p>
+{# <!--<p><a href="/booktest/list/">返回上一页</a></p>--> #}
+<p><a href="{% url 'booktest:list'  %}">返回上一页</a></p>
 </body>
 </html>
