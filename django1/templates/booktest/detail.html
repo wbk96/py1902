@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+</head>
+<body>
+<h2>详情</h2>
+{% if book %}
+    <h2>{{ book.title }}</h2>
+    {% for b in book.heroinfo_set.all %}
+        <ul>
+        <li>{{ b.name }}--{{ b.gender }}--{{ b.skill }}&nbsp;&nbsp;&nbsp;<a href="{% url 'booktest:deletehero' b.id %}">删除</a></li>
+        </ul>
+    {% empty %}
+        没有书籍
+    {% endfor %}
+{% else %}
+没收到
+{% endif %}
+<!--<p><a href="/booktest/list/">返回上一页</a></p>-->
+<p><a href="{% url 'booktest:list' %}">返回上一页</a></p>
+</body>
+</html>

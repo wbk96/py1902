@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from .models import HeroInfo,BookInfo
 # Create your views here.
@@ -32,3 +32,15 @@ def detail(request,id):
     result = temp.render({'book':book})
     return HttpResponse(result)
 # list('request')
+
+def deletebook(request,id):
+    # return HttpResponse('SUCCESS')
+    BookInfo.objects.get(pk=id).delete()
+    return HttpResponseRedirect('/booktest/list/')
+
+def deletehero(request,id):
+    # return HttpResponse('SUCCESS')
+    hero=HeroInfo.objects.get(pk=id)
+    bookid=hero.book.id
+    hero.delete()
+    return HttpResponseRedirect('/booktest/detail/%s'%bookid)

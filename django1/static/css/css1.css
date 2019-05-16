@@ -1,0 +1,8 @@
+div.container{
+    width: 700px;
+    margin:0 auto;
+    background:red;
+}
+li{
+    color : 'yellow';
+}
