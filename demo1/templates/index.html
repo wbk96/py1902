@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load extend_fun %}
 
 {% block left %}
     {% if page %}
@@ -22,7 +22,7 @@
                         </header>
                         <div class="entry-content clearfix">
                             <p>
-                                {{ i.body }}
+                                {{ i.body|myslice:10 }}...
                             </p>
                             <div class="read-more cl-effect-14">
                                 <a href="{% url 'boke:single' i.id %}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
