@@ -1,9 +1,12 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect,reverse
 from django.http import HttpResponse
 from .models import *
 from django.core.paginator import Paginator
 import markdown
 from comments.forms import comment
+from django.core.mail import send_mail,send_mass_mail
+from django.conf import settings
+from django.views import View
 # Create your views here.
 
 
@@ -62,6 +65,29 @@ def catetag(request,id):
     return render(request, 'index.html', {'page': page})
 
 def contactus(request):
-    return render(request,'contact.html')
+
+    if request.method=='GET':
+        return render(request,'contact.html')
+    elif request.method=='POST':
+        try:
+            send_mail('测试邮件', '测试用的', settings.DEFAULT_FROM_EMAIL, ['1774678547@qq.com', ])
+        except Exception as e:
+            print(e)
+        return redirect(reverse('boke:contactus'))
+
+class addimg(View):
+    print('走过没')
+    def get(self,request):
+        return render(request,'addimg.html')
+    def post(self,request):
+        try:
+            img=request.FILES['img']
+            desc=request.POST.get('desc')
+            ad=Ads(img=img,desc=desc)
+            ad.save()
+            return redirect(reverse('boke:index'))
+        except Exception as e:
+            return redirect(reverse('boke:addimg'),{'error':'未添加成功'})
+
 
 

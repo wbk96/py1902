@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^catetag/(\d+)/$',views.catetag,name='catetag'),
     url(r'^rss/$',feed.BlogFeed(),name='rss'),
     url(r'contactus/$',views.contactus,name='contactus'),
+    url(r'^addimg/$',views.addimg.as_view(),name='addimg'),
     url(r'^single/(\d+)/$',views.single,name='single'),
 ]

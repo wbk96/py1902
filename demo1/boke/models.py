@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+
 # Create your models here.
 
 #分类模型
@@ -47,5 +48,17 @@ class MessageInfo(models.Model):
     subject =models.CharField(max_length=50)
     #非Django原生类型
     info=HTMLField()
+
+class Ads(models.Model):
+
+    img=models.ImageField(upload_to='ads',verbose_name='广告图')
+    desc = models.CharField(max_length=20,verbose_name='广告描述')
+
+    def __str__(self):
+        return self.desc
+
+    class Meta():
+        verbose_name= '轮播图'
+        verbose_name_plural=verbose_name
 
 

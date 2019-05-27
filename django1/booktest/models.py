@@ -16,3 +16,26 @@ class HeroInfo(models.Model):
     def __str__(self):
         return self.name
 
+class modelext(models.Manager):
+    def createone(self,_title):
+        t=self.model()
+        t.tel=_title
+        t.save()
+    def getone(self,_title):
+        self.createone(_title)
+        return
+
+
+class tel(models.Model):
+    tel=models.CharField(max_length=20)
+    #添加字段   字段为模型管理器
+    # manager=models.Manager()
+    objects= modelext()
+    @classmethod
+    def create(cls,_title):
+        t=cls(tel=_title)
+        t.save()
+
+
+
+

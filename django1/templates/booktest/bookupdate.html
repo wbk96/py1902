@@ -6,9 +6,9 @@
 </head>
 <body>
 <h2>书籍修改</h2>
-<form action="{% url 'booktest:bookupdate' bookid %} " method="post">
-    书籍姓名：<input type="text" name="bookname"><br>
-    书籍日期：<input type="datetime-local" name="time"><br>
+<form action="{% url 'booktest:bookupdate' book.id %} " method="post">
+    书籍姓名：<input type="text" name="bookname" placeholder="{{ book }}"><br>
+    书籍日期：<input type="date" name="time" placeholder="{{ book.bpud_data }}"><br>
     <input type="submit" value="提交">
 </form>
 </body>

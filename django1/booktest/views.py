@@ -70,20 +70,20 @@ def addbook(request):
         return HttpResponseRedirect('/booktest/list/')
 
 def bookupdate(request,id):
+    book = BookInfo.objects.get(pk=id)
     if request.method=='GET':
-        return render(request,'booktest/bookupdate.html',{'bookid':id})
+        return render(request,'booktest/bookupdate.html',{'book':book})
     elif request.method=='POST':
-        book=BookInfo.objects.get(pk=id)
         book.title=request.POST['bookname']
         book.bpud_data=request.POST['time']
         book.save()
         return HttpResponseRedirect('/booktest/list/')
 
 def heroupdate(request,id):
+    hero = HeroInfo.objects.get(pk=id)
     if request.method=='GET':
-        return render(request,'booktest/heroupdate.html',{"heroid":id})
+        return render(request,'booktest/heroupdate.html',{"hero":hero})
     elif request.method=='POST':
-        hero=HeroInfo.objects.get(pk=id)
         bookid=hero.book.id
         hero.name=request.POST['heroname']
         hero.gender=request.POST['sex']
