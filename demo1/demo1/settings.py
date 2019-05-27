@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'boke',
     'comments',
     # 需要使用到第三方的静态资源，必须注册应用
-    'tinymce',
-]
+    'tinymce',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
